@@ -21,6 +21,7 @@ This is a solution to the [REST Countries API with color theme switcher challeng
 ## Overview
 
 This is a solution to the [REST Countries API with color theme switcher challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca).
+[REST Countries API documentation](https://restcountries.com/).
 
 ### The challenge
 
@@ -43,8 +44,6 @@ Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to t
 
 Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
 
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
-
 ### Links
 
 - Solution: [GitHub respository](https://github.com/PawelGargula/rest-countries-api)
@@ -54,13 +53,15 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 ### Plan
 
-
+- Read REST COUNTRIES API documentation
+- Add HTML template
+- Style elements
 
 ### Time to complete
 Legend 1 pomodoro is about 30 min (25 min + short break)
 
-- Prediction: No prediction yet
-- Reality: I spent 1 pomodoro
+- Prediction: 85 pomodoro (42.5 hours / about 7 working days in full time job)
+- Reality: I already spent 7 pomodoro
 
 ### Built with
 
