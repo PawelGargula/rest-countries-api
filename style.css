@@ -39,20 +39,22 @@
     --light-input-color: hsl(0, 0%, 52%);
     --light-bgc: hsl(0, 0%, 98%);
     --white: hsl(0, 0%, 100%);
+    --shadow-color: hsl(0deg 0% 80%);
 
     /* font sizes */
     --fs-small: 1.2rem;
     --fs-medium: 1.4rem;
     --fs-big: 1.8rem;
-    
+
     font-size: 10px;
 }
 
 img {
-    max-width: 100%;
+    width: 100%;
 }
 
 body {
+    background-color: var(--light-bgc);
     color: var(--light-text-color);
     font-weight: 300;
     font-size: var(--fs-medium);
@@ -61,14 +63,17 @@ body {
 /* header */
 header {
     background-color: var(--white);
-    box-shadow: 0 0 2px 2px hsl(0, 0%, 0%, .1);
+    box-shadow: 0 0px 12px 0 var(--shadow-color);
     padding-block: var(--gap-big);
     position: sticky;
     top: 0;
     z-index: 1;
 }
 
-header, main {
+.header-container,
+main {
+    max-width: 1300px;
+    margin: 0 auto;
     padding-inline: var(--gap-small);
 }
 
@@ -76,13 +81,12 @@ h1 {
     font-size: var(--fs-medium);
 }
 
-button {
+.swich-mode-button {
     font-size: var(--fs-small);
 }
 
 /* main */
 main {
-    background-color: var(--light-bgc);
     display: flex;
     flex-flow: column wrap;
     gap: var(--gap-big);
@@ -90,18 +94,26 @@ main {
 }
 
 /* inputs */
+input[type="search"],
+select {
+    border: none;
+    box-shadow: 1px 1px 6px 0px var(--shadow-color);
+    padding: 1.6rem;
+}
+
 input[type="search"] {
     width: 100%;
 }
 
 select {
-    width: 60%;
+    width: 200px;
 }
 
 /* main content */
-.main-content {
+.main-content,
+.inputs {
     display: flex;
-    flex-flow: column wrap;
+    flex-direction: column;
     gap: var(--gap-big);
 }
 
@@ -126,3 +138,40 @@ select {
     line-height: 1.6;
 }
 
+@media (min-width: 700px) {
+    img {
+        height: 168px;
+    }
+
+    h1 {
+        font-size: 2.6rem;
+    }
+
+    .swich-mode-button {
+        font-size: var(--fs-big);
+    }
+
+    input[type="search"] {
+        width: 400px;
+    }
+
+    .inputs {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .main-content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+        margin-inline: 0;
+    }
+}
+
+@media (min-width: 1100px) {
+    .main-content {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
