@@ -55,13 +55,16 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 - Read REST COUNTRIES API documentation
 - Add HTML template
-- Style elements
+- Style elements for mobile
+- Style elements for desktop
+- JS - Add load all countries feature
+- JS - Add search for country feature
 
 ### Time to complete
 Legend 1 pomodoro is about 30 min (25 min + short break)
 
 - Prediction: 85 pomodoro (42.5 hours / about 7 working days in full time job)
-- Reality: I already spent 12 pomodoro
+- Reality: I already spent 15 pomodoro
 
 ### Built with
 
@@ -70,6 +73,8 @@ Legend 1 pomodoro is about 30 min (25 min + short break)
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
+- Java script
+- REST COUNTRIES API
 
 ### What I learned
 
