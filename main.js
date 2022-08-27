@@ -1,22 +1,57 @@
 // Link for one country: https://restcountries.com/v3.1/name/germany
+const allCountriesURL = "https://restcountries.com/v2/all?fields=flags,name,population,region,capital";
+
 const main = document.querySelector('.main-content');
+const searchInput = document.querySelector('#search');
 
-async function addAllCountriesToDOM() {
+addCountriesToDOM(allCountriesURL);
+
+searchInput.oninput = () => {
+    if (searchInput.value.trim().length === 0) {
+        addCountriesToDOM(allCountriesURL);
+    } else {
+        const url = `https://restcountries.com/v3.1/name/${searchInput.value}?fields=flags,name,population,region,capital`;
+        addCountriesToDOM(url);
+    }
+}
+
+async function addCountriesToDOM(url) {
+    const countries = await loadCountries(url);
+
     main.innerHTML = '';
-
-    const countries = await loadAllCountries();
+    
+    if (countries === undefined) {
+        const para = document.createElement('p');
+        para.textContent = "Cannot find countries.";
+        main.appendChild(para);
+        return;
+    }
 
     countries.forEach(country => {
-        const card = createCard(country.flags.png, country.name, country.population, country.region, country.capital)
+        let countryName = country.name;
+        // If API returns object - we have to go deeper to get name (as single string)
+        if (typeof countryName === 'object') {
+            countryName = countryName.common;
+        }
+
+        const card = createCard(country.flags.png, countryName, country.population, country.region, country.capital);
         main.appendChild(card);
     });
 
 }
 
-async function loadAllCountries() {
-    const response = await fetch("https://restcountries.com/v2/all?fields=flags,name,population,region,capital");
-    const data = await response.json();
-    return data;
+async function loadCountries(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Cannot find countries');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function createCard(imgSrc, name, population, region, capital) {
@@ -65,5 +100,3 @@ function createSingleInfoElement(name, value) {
 
     return singleInfo;
 }
-
-addAllCountriesToDOM();
