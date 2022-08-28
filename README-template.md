@@ -57,14 +57,15 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - Add HTML template
 - Style elements for mobile
 - Style elements for desktop
-- JS - Add load all countries feature
-- JS - Add search for country feature
+- JS - Add load all countries
+- JS - Add search for country 
+- Add dark mode
 
 ### Time to complete
 Legend 1 pomodoro is about 30 min (25 min + short break)
 
 - Prediction: 85 pomodoro (42.5 hours / about 7 working days in full time job)
-- Reality: I already spent 15 pomodoro
+- Reality: I already spent 22 pomodoro
 
 ### Built with
 
