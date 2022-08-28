@@ -1,43 +1,37 @@
 // Link for one country: https://restcountries.com/v3.1/name/germany
-const allCountriesURL = "https://restcountries.com/v2/all?fields=flags,name,population,region,capital";
+const body = document.querySelector('body');
+const switchModeBtn = document.querySelector('.swich-mode-button');
 
-const main = document.querySelector('.main-content');
-const searchInput = document.querySelector('#search');
-
-addCountriesToDOM(allCountriesURL);
-
-searchInput.oninput = () => {
-    if (searchInput.value.trim().length === 0) {
-        addCountriesToDOM(allCountriesURL);
+switchModeBtn.onclick = () => {
+    if (body.dataset.actualMode === 'light') {
+        switchModeBtn.textContent = 'Light Mode';
+        body.dataset.actualMode = 'dark';
     } else {
-        const url = `https://restcountries.com/v3.1/name/${searchInput.value}?fields=flags,name,population,region,capital`;
-        addCountriesToDOM(url);
+        switchModeBtn.textContent = 'Dark Mode';
+        body.dataset.actualMode = 'light';
     }
 }
 
-async function addCountriesToDOM(url) {
-    const countries = await loadCountries(url);
+const mainContent = document.querySelector('.main-content');
+const nameInput = document.querySelector('#search');
+const regionInput = document.querySelector('#region');
 
-    main.innerHTML = '';
-    
-    if (countries === undefined) {
+main();
+
+async function main() {
+    const allCountries = await loadCountries('https://restcountries.com/v2/all?fields=flags,name,population,region,capital');
+
+    if (allCountries === undefined) {
         const para = document.createElement('p');
-        para.textContent = "Cannot find countries.";
-        main.appendChild(para);
+        para.textContent = 'Cannot find countries.';
+        mainContent.appendChild(para);
         return;
     }
 
-    countries.forEach(country => {
-        let countryName = country.name;
-        // If API returns object - we have to go deeper to get name (as single string)
-        if (typeof countryName === 'object') {
-            countryName = countryName.common;
-        }
+    addCountriesToDOM(allCountries);
 
-        const card = createCard(country.flags.png, countryName, country.population, country.region, country.capital);
-        main.appendChild(card);
-    });
-
+    // Add events to searching inputs
+    nameInput.oninput = regionInput.onchange = () => filterCountries(allCountries);
 }
 
 async function loadCountries(url) {
@@ -47,11 +41,20 @@ async function loadCountries(url) {
             throw new Error('Cannot find countries');
         }
 
-        const data = await response.json();
-        return data;
+        const countries = await response.json();
+        return countries;
     } catch (e) {
         console.error(e);
     }
+}
+
+function addCountriesToDOM(countries) {
+    mainContent.innerHTML = '';
+
+    countries.forEach(country => {
+        const card = createCard(country.flags.png, country.name, country.population, country.region, country.capital);
+        mainContent.appendChild(card);
+    });
 }
 
 function createCard(imgSrc, name, population, region, capital) {
@@ -77,7 +80,7 @@ function createInfoElement(name, population, region, capital) {
     const nameElement = document.createElement('h2');
     nameElement.textContent = name;
 
-    const populationElement = createSingleInfoElement("Population: ", population);
+    const populationElement = createSingleInfoElement("Population: ", population.toLocaleString());
     const regionElement = createSingleInfoElement("Region: ", region);
     const capitalElement = createSingleInfoElement("Population: ", capital);
 
@@ -99,4 +102,25 @@ function createSingleInfoElement(name, value) {
     singleInfo.append(header, content);
 
     return singleInfo;
+}
+
+function filterCountries(allCountries) {
+    let filteredCountries;
+    if (nameInput.value.trim().length === 0 && regionInput.value === 'all') {
+        filteredCountries = allCountries;
+    } else if (regionInput.value === 'all') {
+        filteredCountries = allCountries.filter(country =>
+            country.name.toLowerCase().includes(nameInput.value.trim().toLowerCase())
+        );
+    } else if (nameInput.value.trim().length === 0) {
+        filteredCountries = allCountries.filter(country =>
+            country.region.toLowerCase().includes(regionInput.value)
+        );
+    } else {
+        filteredCountries = allCountries.filter(country =>
+            country.name.toLowerCase().includes(nameInput.value.trim().toLowerCase())
+            && country.region.toLowerCase().includes(regionInput.value)
+        );
+    }
+    addCountriesToDOM(filteredCountries);
 }
