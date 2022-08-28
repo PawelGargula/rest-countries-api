@@ -82,7 +82,14 @@ h1 {
 }
 
 .swich-mode-button {
+    background-color: transparent;
+    border: none;
     font-size: var(--fs-small);
+    cursor: pointer;
+}
+
+.swich-mode-button:hover {
+    color: hsla(0, 0%, 0%, 0.6);
 }
 
 /* main */
@@ -134,8 +141,30 @@ select {
 }
 
 .card .info {
-    padding: var(--gap-medium);
+    padding: var(--gap-medium) var(--gap-medium) var(--gap-big);
     line-height: 1.6;
+}
+
+/* Dark mode */
+[data-actual-mode="dark"] {
+    background-color: var(--dark-bgc);
+}
+
+[data-actual-mode="dark"] :is(header, input, select) {
+    box-shadow: none;
+}
+
+[data-actual-mode="dark"] :is(header, .swich-mode-button, input, select, .card) {
+    color: var(--white);
+    background-color: var(--dark-elements-color);
+}
+
+[data-actual-mode="dark"] input::placeholder {
+    color: white;
+}
+
+[data-actual-mode="dark"] .swich-mode-button:hover {
+    color: hsla(0, 0%, 100%, 0.8);
 }
 
 @media (min-width: 700px) {
