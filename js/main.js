@@ -170,7 +170,7 @@ async function loadCountryDetails(name) {
     console.log(country);
 
     addCountryDetailsToDOM(
-        country.flags.svg,
+        country.flags.png,
         name,
         Object.values(country.name.nativeName)[0].common, 
         country.population.toLocaleString(),
