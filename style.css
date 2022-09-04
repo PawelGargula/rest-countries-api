@@ -114,6 +114,7 @@ input[type="search"] {
 
 select {
     width: 200px;
+    cursor: pointer;
 }
 
 /* main content */
@@ -127,7 +128,17 @@ select {
 /* cards */
 .card {
     background-color: var(--white);
+    border: none;
+    box-shadow: 1px 1px 6px 0px var(--shadow-color);
+    cursor: pointer;
+    font-size: inherit;
     margin-inline: var(--gap-big);
+    text-align: left;
+    transition: .2s translate;
+}
+
+.card:hover {
+    translate: 0 -.6rem;
 }
 
 .card img {
@@ -150,7 +161,7 @@ select {
     background-color: var(--dark-bgc);
 }
 
-[data-actual-mode="dark"] :is(header, input, select) {
+[data-actual-mode="dark"] :is(header, input, select, .card) {
     box-shadow: none;
 }
 
@@ -159,7 +170,11 @@ select {
     background-color: var(--dark-elements-color);
 }
 
-[data-actual-mode="dark"] :is(input::placeholder, .detail-content) {
+[data-actual-mode="dark"] input::placeholder {
+    color: white;
+}
+
+[data-actual-mode="dark"] .detail-content {
     color: white;
 }
 
@@ -294,7 +309,11 @@ select {
     }
 
     .detail-content > img {
-        width: 40%;
+        flex: 1 1 0;
+    }
+
+    .detail-content .detail-text {
+        flex: 1 1 0;
     }
 
     .detail-text {
