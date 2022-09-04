@@ -65,7 +65,7 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 Legend 1 pomodoro is about 30 min (25 min + short break)
 
 - Prediction: 85 pomodoro (42.5 hours / about 7 working days in full time job)
-- Reality: I already spent 36 pomodoro
+- Reality: I already spent 40 pomodoro
 
 ### Built with
 
