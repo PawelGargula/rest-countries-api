@@ -132,9 +132,14 @@ select {
     box-shadow: 1px 1px 6px 0px var(--shadow-color);
     cursor: pointer;
     font-size: inherit;
-    margin-inline: var(--gap-big);
     text-align: left;
     transition: .2s translate;
+}
+
+@media (min-width: 320px) {
+    .card {
+        margin-inline: var(--gap-big);
+    }
 }
 
 .card:hover {
