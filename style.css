@@ -113,8 +113,9 @@ input[type="search"] {
 }
 
 select {
-    width: 200px;
+    background-color: white;
     cursor: pointer;
+    width: 200px;
 }
 
 /* main content */
