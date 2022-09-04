@@ -42,6 +42,7 @@ function addSearchingInputs() {
 
     regionInput = document.createElement('select');
     regionInput.classList.add('rounded-element');
+    regionInput.ariaLabel = 'Filter by region';
 
     const option1 = createOption('all', 'Filter by region (All)');
 
