@@ -119,7 +119,7 @@ function createInfoElement(name, population, region, capital) {
 
     const populationElement = createSingleInfoElement("Population: ", population.toLocaleString());
     const regionElement = createSingleInfoElement("Region: ", region);
-    const capitalElement = createSingleInfoElement("Population: ", capital);
+    const capitalElement = createSingleInfoElement("Capital: ", capital);
 
     info.append(nameElement, populationElement, regionElement, capitalElement);
 
@@ -243,7 +243,7 @@ function addCountryDetailsToDOM(imgSrc, name, nativeName, population, region, su
     
     const topLevelDomainElement = createSingleInfoElement('Top Level Domain: ', topLevelDomain);
     const currenciesElement = createSingleInfoElement('Currencies: ', currencies);
-    const languagesElement = createSingleInfoElement('Currencies: ', languages);
+    const languagesElement = createSingleInfoElement('Languages: ', languages);
 
     detailInfo2.append(
         topLevelDomainElement,
