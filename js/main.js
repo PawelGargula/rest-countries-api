@@ -2,7 +2,7 @@ const main = document.querySelector('main');
 
 let nameInput;
 let regionInput;
-let mainContent;
+let homeContent;
 
 loadHomeContent();
 
@@ -11,17 +11,17 @@ async function loadHomeContent() {
 
     addSearchingInputs();
 
-    mainContent = document.createElement('div');
-    mainContent.classList.add('main-content');
+    homeContent = document.createElement('div');
+    homeContent.classList.add('home-content');
 
-    main.appendChild(mainContent);
+    main.appendChild(homeContent);
 
     const allCountries = await loadCountries('https://restcountries.com/v3.1/all?fields=flags,name,population,region,capital');
 
     if (allCountries === undefined) {
         const para = document.createElement('p');
         para.textContent = 'Cannot find countries.';
-        mainContent.appendChild(para);
+        homeContent.appendChild(para);
         return;
     }
 
@@ -85,11 +85,11 @@ async function loadCountries(url) {
 }
 
 function addCountriesToDOM(countries) {
-    mainContent.innerHTML = '';
+    homeContent.innerHTML = '';
 
     countries.forEach(country => {
         const card = createCard(country.flags.png, country.name.common, country.population, country.region, country.capital);
-        mainContent.appendChild(card);
+        homeContent.appendChild(card);
     });
 }
 
