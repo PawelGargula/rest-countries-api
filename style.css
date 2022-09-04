@@ -194,7 +194,7 @@ select {
     background-color: hsl(209, 23%, 25%);
 }
 
-/* Style detail country content */
+/* Style counry details page */
 .back,
 .detail-content {
     margin-inline: var(--gap-small);
