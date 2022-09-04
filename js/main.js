@@ -144,16 +144,20 @@ function createSingleInfoElement(name, value) {
 function filterCountries(allCountries) {
     let filteredCountries;
     if (nameInput.value.trim().length === 0 && regionInput.value === 'all') {
+        // Get all
         filteredCountries = allCountries;
     } else if (regionInput.value === 'all') {
+        // Filter by name
         filteredCountries = allCountries.filter(country =>
             country.name.common.toLowerCase().includes(nameInput.value.trim().toLowerCase())
         );
     } else if (nameInput.value.trim().length === 0) {
+        // Filter by region
         filteredCountries = allCountries.filter(country =>
             country.region.toLowerCase().includes(regionInput.value)
         );
     } else {
+        //Filter by name and region
         filteredCountries = allCountries.filter(country =>
             country.name.common.toLowerCase().includes(nameInput.value.trim().toLowerCase())
             && country.region.toLowerCase().includes(regionInput.value)
@@ -164,10 +168,6 @@ function filterCountries(allCountries) {
 
 async function loadCountryDetails(name) {
     const country = (await loadCountries(`https://restcountries.com/v3.1/name/${name}?fields=flags,name,population,region,subregion,capital,tld,currencies,languages,borders&fullText=true`))[0];
-
-    let borderCountries = country.borders; 
-
-    console.log(country);
 
     addCountryDetailsToDOM(
         country.flags.png,
@@ -180,31 +180,14 @@ async function loadCountryDetails(name) {
         country.tld,
         Object.values(country.currencies)[0].name,
         Object.values(country.languages).join(', '),
-        borderCountries
+        country.borders
         );
 }
 
 function addCountryDetailsToDOM(imgSrc, name, nativeName, population, region, subregion, capital, topLevelDomain, currencies, languages, borderCountries) {
     main.innerHTML = '';
-    
-    console.log(`
-    ${imgSrc},
-    ${name},
-    ${nativeName},
-    ${population},
-    ${region},
-    ${subregion},
-    ${capital},
-    ${topLevelDomain},
-    ${currencies},
-    ${languages},
-    ${borderCountries},
-    `);
 
-    const backBtn = document.createElement('button');
-    backBtn.classList.add('button', 'back', 'semi-bold');
-    backBtn.innerText = 'Back';
-    backBtn.onclick = loadHomeContent;
+    const backBtn = createBackBtn();
 
     const detailContent = document.createElement('div');
     detailContent.classList.add('detail-content');
@@ -213,17 +196,43 @@ function addCountryDetailsToDOM(imgSrc, name, nativeName, population, region, su
     flag.src = imgSrc;
     flag.alt = '';
 
-    const detailText = document.createElement('div');
-    detailText.classList.add('detail-text');
+    const detailText = createDetailText(name, nativeName, population, region, subregion, capital, topLevelDomain, currencies, languages, borderCountries);
 
     detailContent.append(flag, detailText);
 
-    const commonName = document.createElement('h2');;
+    main.append(backBtn, detailContent);
+}
+
+function createBackBtn() {
+    const backBtn = document.createElement('button');
+    backBtn.classList.add('button', 'back', 'semi-bold');
+    backBtn.innerText = 'Back';
+    backBtn.onclick = loadHomeContent;
+    return backBtn;
+}
+
+function createDetailText(name, nativeName, population, region, subregion, capital, topLevelDomain, currencies, languages, borderCountries) {
+    const detailText = document.createElement('div');
+    detailText.classList.add('detail-text');
+    
+    const commonName = document.createElement('h2');
     commonName.textContent = name;
 
+    const detailInfo1 = createDetailInfo1(nativeName, population, region, subregion, capital);
+
+    const detailInfo2 = createDetailInfo2(topLevelDomain, currencies, languages);
+
+    const borderCountriesElement = createBorderCountriesElement(borderCountries);
+    
+    detailText.append(commonName, detailInfo1, detailInfo2, borderCountriesElement);
+
+    return detailText;
+}
+
+function createDetailInfo1(nativeName, population, region, subregion, capital) {
     const detailInfo1 = document.createElement('div');
     detailInfo1.classList.add('detail-info');
-    
+
     const nativeNameElement = createSingleInfoElement('Native name: ', nativeName);
     const populationElement = createSingleInfoElement('Population: ', population);
     const regionElement = createSingleInfoElement('Region: ', region);
@@ -235,12 +244,15 @@ function addCountryDetailsToDOM(imgSrc, name, nativeName, population, region, su
         populationElement,
         regionElement,
         subRegionElement,
-        capitalElement,
-        )
+        capitalElement
+    );
+    return detailInfo1;
+}
 
+function createDetailInfo2(topLevelDomain, currencies, languages) {
     const detailInfo2 = document.createElement('div');
     detailInfo2.classList.add('detail-info');
-    
+
     const topLevelDomainElement = createSingleInfoElement('Top Level Domain: ', topLevelDomain);
     const currenciesElement = createSingleInfoElement('Currencies: ', currencies);
     const languagesElement = createSingleInfoElement('Languages: ', languages);
@@ -248,9 +260,12 @@ function addCountryDetailsToDOM(imgSrc, name, nativeName, population, region, su
     detailInfo2.append(
         topLevelDomainElement,
         currenciesElement,
-        languagesElement,
-    )
+        languagesElement
+    );
+    return detailInfo2;
+}
 
+function createBorderCountriesElement(borderCountries) {
     const borderCountriesElement = document.createElement('div');
     borderCountriesElement.classList.add('border-countries');
 
@@ -259,12 +274,6 @@ function addCountryDetailsToDOM(imgSrc, name, nativeName, population, region, su
     countriesHeader.classList.add('semi-bold-fw');
 
     const buttons = document.createElement('div');
-
-    borderCountriesElement.append(countriesHeader, buttons);
-
-    detailText.append(commonName, detailInfo1, detailInfo2, borderCountriesElement);
-    
-    main.append(backBtn, detailContent);
 
     borderCountries.forEach(async (countryCode) => {
         const country = await loadCountries(`https://restcountries.com/v3.1/alpha/${countryCode}?fields=name&fullText=true`);
@@ -277,4 +286,8 @@ function addCountryDetailsToDOM(imgSrc, name, nativeName, population, region, su
 
         buttons.appendChild(countryBtn);
     });
+    
+    borderCountriesElement.append(countriesHeader, buttons);
+
+    return borderCountriesElement;
 }
