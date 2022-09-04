@@ -117,7 +117,7 @@ select {
 }
 
 /* main content */
-.main-content,
+.home-content,
 .inputs {
     display: flex;
     flex-direction: column;
@@ -270,7 +270,7 @@ select {
         justify-content: space-between;
     }
 
-    .main-content {
+    .home-content {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
@@ -303,7 +303,7 @@ select {
 }
 
 @media (min-width: 1100px) {
-    .main-content {
+    .home-content {
         grid-template-columns: repeat(4, 1fr);
     }
 
