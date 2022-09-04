@@ -305,7 +305,7 @@ select {
 
     .detail-content {
         flex-direction: row;
-        align-items: center;
+        align-items: flex-start;
     }
 
     .detail-content > img {
