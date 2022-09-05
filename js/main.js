@@ -96,8 +96,9 @@ function addCountriesToDOM(countries) {
 }
 
 function createCard(imgSrc, name, population, region, capital) {
-    const card = document.createElement('button');
+    const card = document.createElement('div');
     card.classList.add('card', 'rounded-element');
+    card.tabIndex = 0;
 
     const flag = document.createElement('img');
     flag.src = imgSrc;
