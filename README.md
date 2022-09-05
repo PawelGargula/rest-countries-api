@@ -73,7 +73,7 @@ Users should be able to:
 Legend: 1 pomodoro is about 30 min (25 min + short break)
 
 - Prediction: 85 pomodoro (42.5 hours / about 7 working days in full time job)
-- Reality: I made it in 43 pomodoro (about 22 hours)
+- Reality: I made it in 47 pomodoro (about 22 hours)
 
 Made it faster that i thought.
 
