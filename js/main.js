@@ -110,6 +110,14 @@ function createCard(imgSrc, name, population, region, capital) {
 
     card.append(flag, info);
     card.onclick = () => loadCountryDetails(name);
+    card.onkeydown =  (e) => {
+        if (e.code === 'Enter' || 
+            e.code === 'Space' ||
+            e.code === 'NumpadEnter') {
+            e.preventDefault();
+            loadCountryDetails(name);
+        }
+    };
 
     return card;
 }
