@@ -42,8 +42,7 @@ function addSearchingInputs() {
 
     regionInput = document.createElement('select');
     regionInput.classList.add('rounded-element');
-    regionInput.ariaLabel = 'filter by region';
-    regionInput.name = 'regions';
+    regionInput.ariaLabel = 'Filter by region';
 
     const option1 = createOption('all', 'Filter by region (All)');
 
@@ -103,6 +102,8 @@ function createCard(imgSrc, name, population, region, capital) {
     const flag = document.createElement('img');
     flag.src = imgSrc;
     flag.alt = `${name} flag`;
+    flag.width = "250";
+    flag.height = "150";
     flag.loading = "lazy";
 
     const info = createInfoElement(name, population, region, capital);
