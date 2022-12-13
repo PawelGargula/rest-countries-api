@@ -6,8 +6,8 @@ This is a solution to the [REST Countries API with color theme switcher challeng
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
   - [Links](#links)
+  - [Screenshot](#screenshot)
 - [My process](#my-process)
   - [Plan](#plan)
   - [Time to complete](#time-to-complete)
@@ -33,6 +33,11 @@ Users should be able to:
 - Click through to the border countries on the detail page
 - Toggle the color scheme between light and dark mode
 
+### Links
+
+- Solution: [GitHub respository](https://github.com/PawelGargula/rest-countries-api)
+- Live: [GitHub pages](https://pawelgargula.github.io/rest-countries-api/)
+
 ### Screenshot
 
 ![Home - desktop - light mode](screenshots/home_desktop_light.png)
@@ -44,11 +49,6 @@ Users should be able to:
 ![Home - mobile - dark mode](screenshots/home_mobile_dark.png)
 ![Detail - mobile - light mode](screenshots/detail_mobile_light.png)
 ![Detail - mobile - dark mode](screenshots/detail_mobile_dark.png)
-
-### Links
-
-- Solution: [GitHub respository](https://github.com/PawelGargula/rest-countries-api)
-- Live: [GitHub pages](https://pawelgargula.github.io/rest-countries-api/)
 
 ## My process
 
